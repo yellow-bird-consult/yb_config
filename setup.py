@@ -5,14 +5,14 @@ import pathlib
 with open('README.md', 'r') as f:
     long_description = f.read()
 
-# with open(str(pathlib.Path(__file__).parent.absolute()) +
-#           "/flitton_fib_py/version.py", "r") as fh:
-#     version = fh.read().split("=")[1].replace("'", "")
+with open(str(pathlib.Path(__file__).parent.absolute()) +
+          "/flitton_fib_py/version.py", "r") as fh:
+    version = fh.read().split("=")[1].replace("'", "")
 
 
 setup(
     name='ybconfig',
-    version='0.1.0',
+    version=version,
     author='Maxwell Flitton',
     author_email='maxwellflitton@gmail.com',
     packages=find_packages(exclude=("tests",)),
