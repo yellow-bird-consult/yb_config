@@ -3,7 +3,7 @@ This file defines the class WebConfig for managing config data around a web appl
 """
 import os
 import sys
-from typing import Optional, Any
+from typing import Optional, Any, List, Dict
 
 import yaml
 
@@ -102,3 +102,17 @@ class WebConfig(dict, metaclass=Singleton):
         if self._file_path is None:
             self._file_path = sys.argv[-1]
         return self._file_path
+
+    @property
+    def database_meta(self) -> Dict[str, str]:
+        db_string: str = self.get("DB_URL")
+        buffer: List[str] = db_string.split("/")
+        second_buffer: List[str] = buffer[-2].split(":")
+        third_buffer: List[str] = second_buffer[1].split("@")
+        return {
+            "DB_URL": db_string,
+            "DB_NAME": buffer[-1],
+            "DB_USER": second_buffer[0],
+            "DB_PASSWORD": third_buffer[0],
+            "DB_LOCATION": f"{third_buffer[1]}:{second_buffer[-1]}",
+        }

@@ -81,6 +81,17 @@ class TestWebConfig(TestCase):
             self.test.get("ONE", environ=True, file=True)
         self.assertEqual("'file and environ both cannot be True'", str(key_error.exception))
 
+    def test_get_environment_vars(self):
+        os.environ["ENVIRONMENT_CONFIG"] = "true"
+        os.environ["ONE"] = "ones"
+        os.environ["TWO"] = "twos"
+
+        Singleton._instances = {}
+
+        test = WebConfig()
+        self.assertEqual("ones", test.get("ONE"))
+        self.assertEqual("twos", test.get("TWO"))
+
     def test_clean_memory(self):
         sys.argv.append(self.config_path)
         memory_id = id(self.test)
