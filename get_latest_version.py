@@ -11,7 +11,7 @@ def get_latest_version_number() -> str:
     Gets the latest pip version number from the pypi server.
     Returns: (str) the version of the latest pip module
     """
-    req = requests.get("https://pypi.org/pypi/flitton-fib-py/json")
+    req = requests.get("https://pypi.org/pypi/ybconfig/json")
     return req.json()["info"]["version"]
 
 
