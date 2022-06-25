@@ -3,7 +3,6 @@ import pathlib
 from typing import Tuple, List, Union
 
 import requests
-# force a build
 
 
 def get_latest_version_number() -> str:
